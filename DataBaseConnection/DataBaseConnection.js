@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import User from "../Models/UserDeatails.js";
+import TaskModel from "../Models/TaskDetails.js"
 
 
 function DataBaseConnection(url){
