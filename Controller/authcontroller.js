@@ -1,4 +1,5 @@
 import User from "../Models/UserDeatails.js"
+import jwt from "jsonwebtoken";
 
 export const RegisterUser = async (req,res)=>{
     try{
@@ -13,19 +14,25 @@ export const RegisterUser = async (req,res)=>{
 export const LoginUser = async (req,res) =>{
     try{
         const {name , password} = req.body;
-        const users = await User.findOne({name});
+         const users = await User.findOne({name});
 
         if(!users){
             res.send({message : "User Not Found"});
         }
 
-        if(users.Password == password){
-            res.send({message : `welocome ${name}`});
-        }
-
-        else{
+        if(users.Password != password){
             res.send({message : "Invalid Password"});
         }
+
+        const token = jwt.sign(
+            {userId : users._id},
+            "PNSSVARDHAN",
+            {expiresIn:"1d"}
+        );
+        
+        res.send({
+            message :"Welcome" , token
+        });
 
     }catch(error){
         res.send({message : error.message});
@@ -52,3 +59,4 @@ export const User_task = async (req,res) =>{
             res.send({message : err.message});
         }
 }
+

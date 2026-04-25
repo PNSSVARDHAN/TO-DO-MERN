@@ -20,6 +20,7 @@
   "homepage": "https://github.com/PNSSVARDHAN/TO-DO-MERN#readme",
   "dependencies": {
     "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.4.1"
   }
 }
