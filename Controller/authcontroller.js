@@ -43,20 +43,16 @@ export const LoginUser = async (req,res) =>{
 
 export const User_data = async (req,res) =>{
     try{
-        const data = await User.find();
-        res.send(data);
+        const id = req.user.userId;
+        const data = await User.findById(id);
+        const user_data = {
+            "id" : data._id,
+            "name" : data.name,
+            "user_id" : data.user_id
+        }
+        res.send(user_data);
     }catch(err){
         res.send({message : err.message});
     }
-}
-
-export const User_task = async (req,res) =>{
-        try{
-            const id = req.params.id;
-            const data = await User.findOne({user_id : id});
-            res.send(data);
-        }catch(err){
-            res.send({message : err.message});
-        }
 }
 
